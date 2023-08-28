@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title> I accepted challenge | Frontend Mentor | Newsletter sign-up form with success message</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300&display=swap');
+
+    :root {
+
+      --Tomato: rgb(255, 98, 87);
+      --DarkSlateGrey: hsl(234, 29%, 20%);
+      --CharcoalGrey: hsl(235, 18%, 26%);
+      --Grey: hsl(231, 7%, 60%);
+      --White: hsl(0, 0%, 100%);
+
+    }
+
+    html {
+
+      font-size: 62.5%;
+
+    }
+
+    * {
+
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      box-sizing: border-box;
+
+    }
+
+    .container,
+    .success {
+
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      flex-direction:column;
+      row-gap:25px;
+      align-items: center;
+      background: var(--DarkSlateGrey);
+
+    }
+
+    .success {
+
+      background: var(--CharcoalGrey);
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      opacity:0;
+      pointer-events: none;
+      transform:scale(0);
+      transition:all 0.3s ease;
+    }
+
+    .success.active{
+
+      opacity:1;
+      transform:scale(1);
+      pointer-events: auto;
+      
+    }
+
+    .container .wrapper {
+      padding: 20px;
+      display: flex;
+      gap: 40px;
+      background: var(--White);
+      border-radius: 25px;
+      align-items: center;
+      width: 800px;
+      max-width: 100%;
+      margin-inline: 5px;
+
+    }
+
+    .container .wrapper .left {
+
+      padding: 20px;
+      box-sizing: border-box;
+
+    }
+
+    .container .wrapper ul {
+
+      list-style-type: none;
+
+    }
+
+    .container .wrapper .right img {
+
+      max-width: 100%;
+
+    }
+
+    h1 {
+
+      font-weight: 700;
+      font-size: 3.7rem;
+      color: var(--CharcoalGrey);
+      margin-bottom: 20px;
+
+    }
+
+    .container .wrapper .left {
+
+      font-size: 1.5rem;
+      color: var(--CharcoalGrey);
+      font-weight: 500;
+
+    }
+
+    .success {
+
+      font-size: 1.5rem;
+      color: var(--CharcoalGrey);
+      font-weight: 400;
+
+    }
+
+    .success-container{
+
+      width:fit-content;
+      background:var(--White);
+      border-radius:25px;
+      padding:20px;
+      width:380px;
+      max-width:100%;
+
+    }
+
+    .success-container img{
+
+      width:40px;
+      margin-bottom:20px;
+
+    }
+
+    .success-container p{
+
+      margin-bottom:15px;
+
+    }
+
+    .container .wrapper ul li {
+
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      margin: 15px 0;
+
+    }
+
+    .container .wrapper p {
+
+      margin-bottom: 20px;
+
+    }
+
+    .container .wrapper form {
+
+      margin-top: 40px;
+
+    }
+
+    .container .wrapper form .label {
+
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+
+    .container .wrapper form .error {
+
+      color: var(--Tomato);
+      font-size: 1.4rem;
+
+    }
+
+    .container .wrapper form label {
+
+      color: var(--CharcoalGrey);
+
+    }
+
+    .container .wrapper form input.incorrect {
+
+      color: var(--Tomato);
+      background: rgba(255, 98, 87, 0.2);
+      border-color: rgba(255, 98, 87, 0.5);
+
+    }
+
+    .container .wrapper form input,
+    .dismiss-btn {
+
+      width: 100%;
+      height: 48px;
+      border-radius: 7px;
+      border: none;
+      outline: none;
+      border: 1px solid #ccc;
+      padding-inline: 10px;
+      margin: 10px 0;
+      color: var(--DarkSlateGrey);
+
+    }
+
+    .container .wrapper form input::placeholder {
+
+      color: var(--Grey);
+
+    }
+
+    .container .wrapper form input[type=submit],
+    .dismiss-btn {
+
+      background: var(--DarkSlateGrey);
+      color: var(--White);
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+
+    }
+
+    .container .wrapper form input[type=submit]:hover,
+    .dismiss-btn:hover {
+
+      background: var(--Tomato);
+
+    }
+
+
+    @media screen and (max-width:600px) {
+
+      .container .wrapper {
+
+        flex-direction: column-reverse;
+        padding: 0;
+
+      }
+
+      .container .wrapper .right {
+
+        width: 100%;
+
+      }
+
+      .container .wrapper .right .desktop {
+
+        display: none;
+
+      }
+
+      .container .wrapper {
+
+        margin-inline: 0;
+        border-radius: 0;
+
+      }
+
+      .container .wrapper .right .mobile {
+
+        display: block !important;
+        width: 100%;
+
+      }
+      
+      .success{
+
+        align-items: stretch;
+
+      }
+
+      .success-container{
+
+        padding-top:100px;
+        height:100vh;
+        width:100%;
+        border-radius:0;
+        display:flex;
+        flex-direction:column;
+
+      }
+
+      .success-container input{
+
+        margin-top:auto;
+
+      }
+
+    }
+
+     .attribution{
+
+      color:var(--White);
+      font-size:1.4rem;
+
+    }
+
+    .attribution a{
+
+      text-decoration: none;
+      color:var(--Tomato);
+      margin-inline:5px 0;
+        
+    }
+    .attribution a:hover{
+
+      text-decoration: underline;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sign-up form start -->
+
+  <div class="container">
+
+    <div class="wrapper">
+      <div class="left">
+        <h1>Stay updated!</h1>
+        <p>Join 60,000+ product managers receiving monthly updates on:</p>
+        <ul>
+          <li>
+            <img src="./assets/images/icon-list.svg" alt="">
+            <span>Product discovery and building what matters</span>
+          </li>
+          <li>
+            <img src="./assets/images/icon-list.svg" alt="">
+            <span>Measuring to ensure updates are a success</span>
+          </li>
+          <li>
+            <img src="./assets/images/icon-list.svg" alt="">
+            <span>And much more!</span>
+          </li>
+        </ul>
+        <form>
+          <div class="label">
+            <label for="email">Email address</label>
+            <span class="error"></span>
+          </div>
+          <input type="text" placeholder="example@company.com" id="email">
+          <input type="submit" value="Subscribe to monthly newsletter">
+        </form>
+      </div>
+      <div class="right">
+        <img src="./assets/images/illustration-sign-up-desktop.svg" class="desktop" alt="">
+        <img src="./assets/images/illustration-sign-up-mobile.svg" class="mobile" style="display:none" alt="">
+      </div>
+    </div>
+
+      <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/ammar642/">Ammar</a>.
+      </footer>
+
+  </div>  
+
+  <!-- Sign-up form end -->
+
+  <!-- Success message start -->
+
+   <div class="success">
+
+    <div class="success-container">
+      <img src="./assets/images/icon-success.svg" alt="">
+
+      <h1>
+        Thanks for subscribing!
+      </h1>
+
+      <p>
+        A confirmation email has been sent to <b class="dynamic-email">ammarTech@company.com.</b> Please open it and click the button inside
+        to confirm your subscription.
+      </p>
+
+      <input type="button" value="Dismiss Message" class="dismiss-btn">
+
+    </div>
+
+  </div>
+  
+
+  <!-- Success message end -->
+
+
+
+  <script>
+
+    let form = document.querySelector('form')
+    let email = form.querySelector('input[type=text]')
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+    form.onsubmit = (e) => {
+
+      e.preventDefault()
+
+      let error = document.querySelector('.error')
+
+      let value = email.value
+
+      if (!value.match(regex)) {
+
+        email.classList.add('incorrect')
+        error.innerText = 'Valid email required'
+        return false
+      } else {
+
+        error.innerText = ''
+        email.classList.remove('incorrect')
+        document.querySelector('.success').classList.add('active')
+        document.querySelector('.dynamic-email').innerText = email.value
+
+      }
+
+    }
+
+    document.querySelector('.dismiss-btn').onclick = ()=>{
+
+      document.querySelector('.success').classList.remove('active')
+
+    }
+
+  </script>
+</body>
+
+</html>
